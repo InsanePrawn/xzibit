@@ -39,7 +39,6 @@ def join_paths(base, suffix):
 
 def files_in_folder(prefix, base_dir, path_currently='', depth=0, max_depth=250):
     results = {}
-    print(base_dir, path_currently)
     with os.scandir(os.path.join(base_dir, path_currently)) as dir:
         log('working on ' + path_currently, True)
         for entry in dir:
