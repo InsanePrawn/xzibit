@@ -51,7 +51,9 @@ def files_in_folder(prefix, base_dir, path_currently='', depth=0, max_depth=250)
                         log(entry_path + ' ignored due to max recursion depth, sorry :/')
                 elif entry.name.endswith('yaml'):
                     log('file found: ' + entry_path, True)
-                    results[entry_path] = os.path.join(base_dir,entry_path)
+                    complete_path = os.path.join(base_dir,entry_path)
+                    results[entry_path] = complete_path
+                    results[prefix+entry_path] = complete_path
     return results
 
 
@@ -76,11 +78,13 @@ def replace_inline(line, files):
         result += line[:placeholder_start]
         file_name = line[placeholder_start+3:placeholder_end]
         log('Replacing stuff!\nline: %s\nstart: %i\nend: %i\nbefore placeholder: %s\nplaceholder: %s\nfile_name: %s\nafter placeholder: %s\n'
-            % (line, placeholder_start, placeholder_end, line[:placeholder_start], line[placeholder_start:placeholder_end], file_name, line[placeholder_end+3:]), True)
+            % (line, placeholder_start, placeholder_end, line[:placeholder_start], line[placeholder_start:placeholder_end+3], file_name, line[placeholder_end+3:]), True)
         # add placeholder-replacement to result
         file = build_config(file_name, files)
         if file is not None:
             result += file
+        else:
+            result = line[placeholder_start:placeholder_end+3]
         # shift placeholder and stuff before it away
         line = line[placeholder_end+3:]
     # line has been cleansed of includes
