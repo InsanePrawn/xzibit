@@ -8,7 +8,7 @@ VARIANT_DICT_PREFIX='|VARIANT|'
 
 debug = True
 config_folder = ''
-base_path = os.getcwd()
+base_path = '/opt/hass/'
 variant_suffixes = ['cfg-public', 'cfg-private']
 common_suffix = 'cfg-common'
 
