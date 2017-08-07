@@ -129,3 +129,4 @@ for variant, variant_path in variant_paths.items():
     output = [build_config('configuration.myaml',files)]
     log('config finished?!\n--------------\n'+'\m'.join(output),True)
     variant_outputs[variant] = output
+    open(os.path.join(variant_path,'configuration.yaml'),'w').writelines(output)
