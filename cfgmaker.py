@@ -8,7 +8,7 @@ VARIANT_DICT_PREFIX='|VARIANT|'
 
 debug = True
 config_folder = ''
-base_path = os.path.dirname(os.path.realpath(__file__))
+base_path = os.path.dirname(os.getcwd())
 variant_suffixes = ['cfg-public', 'cfg-private']
 common_suffix = 'cfg-common'
 
@@ -34,7 +34,7 @@ def join_paths(base, suffix):
     :param suffix: the path target, can be relative or absolute
     :return: a redundancy-free, absolute path.
     '''
-    return os.path.abspath(os.path.relpath(suffix, base))
+    return os.path.abspath(os.path.join(suffix, base))
 
 
 def files_in_folder(prefix, base_dir, path_currently='', depth=0, max_depth=250):
